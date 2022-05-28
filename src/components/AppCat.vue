@@ -1,5 +1,5 @@
 <template>
-  <div class="cat" :class="{ favourite: added }">
+  <div class="cat" :class="{ favourite: isAdded }">
     <div class="cat__image">
       <img :src="image" alt="" />
     </div>
@@ -26,13 +26,13 @@ export default {
   emits: ["catToggle"],
   data() {
     return {
-      added: false,
+      isAdded: false,
     };
   },
   methods: {
     catHandler(id) {
-      this.added = !this.added;
-      this.$emit("catToggle", id, this.added);
+      this.isAdded = !this.isAdded;
+      this.$emit("catToggle", id, this.isAdded);
     },
   },
 };

@@ -11,6 +11,7 @@
           :image="cat.url"
           :id="cat.id"
           class="favourite"
+          @catToggle="removeCat"
         />
       </div>
     </div>
@@ -34,6 +35,11 @@ export default {
         const favouriteCats = JSON.parse(localStorage.getItem("fav"));
         favouriteCats.forEach((cat) => this.$store.dispatch("setCat", cat));
       }
+    },
+    removeCat(id) {
+      const favouriteCat = this.favCats.find((cat) => cat.id === id);
+      this.$store.dispatch("removeCat", favouriteCat);
+      localStorage.setItem("fav", JSON.stringify(this.favCats));
     },
   },
   components: { AppCat },

@@ -34,14 +34,22 @@ export default {
         console.error(e.message);
       }
     },
-    addToFavourite(id) {
+    addToFavourite(id, isAdded) {
       const favouriteCat = this.cats.find((cat) => cat.id === id);
 
-      this.$store.dispatch("setCat", favouriteCat);
-      localStorage.setItem(
-        "fav",
-        JSON.stringify(this.$store.getters.getFavouriteCats)
-      );
+      if (isAdded) {
+        this.$store.dispatch("setCat", favouriteCat);
+        localStorage.setItem(
+          "fav",
+          JSON.stringify(this.$store.getters.getFavouriteCats)
+        );
+      } else {
+        this.$store.dispatch("removeCat", favouriteCat);
+        localStorage.setItem(
+          "fav",
+          JSON.stringify(this.$store.getters.getFavouriteCats)
+        );
+      }
     },
   },
   components: { AppCat },
