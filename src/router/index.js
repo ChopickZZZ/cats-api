@@ -4,7 +4,7 @@ import AppMain from '../components/AppMain'
 import AppFavourite from '../components/AppFavourite'
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHistory(),
   routes: [
     {
       path: '/',
