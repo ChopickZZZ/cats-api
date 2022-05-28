@@ -4,11 +4,11 @@
 </template>
 
 <script>
-import AppHeader from './components/AppHeader.vue'
+import AppHeader from "./components/AppHeader.vue";
 export default {
-  components: { AppHeader }
-}
+  components: { AppHeader },
+};
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 </style>

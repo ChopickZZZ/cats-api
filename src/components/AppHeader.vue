@@ -1,21 +1,19 @@
 <template>
   <header class="header">
     <ul class="menu container">
-      <li class="menu__link">
-        <a class="menu__item" href="#">Все котики</a>
-      </li>
-      <li class="menu__link">
-        <a class="menu__item" href="#">Любимые котики</a>
-      </li>
+      <router-link to="/" class="menu__link">Все котики</router-link>
+      <router-link to="/favourite" class="menu__link"
+        >Любимые котики</router-link
+      >
     </ul>
   </header>
 </template>
 
 <script>
-export default {}
+export default {};
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .header {
   background-color: var(--color-primary-blue);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24);

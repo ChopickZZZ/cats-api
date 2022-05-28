@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import AppMain from '../components/AppMain'
+import AppFavourite from '../components/AppFavourite'
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
@@ -8,6 +9,10 @@ const router = createRouter({
     {
       path: '/',
       component: AppMain
+    },
+    {
+      path: '/favourite',
+      component: AppFavourite
     }
   ]
 })

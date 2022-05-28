@@ -1,7 +1,13 @@
 <template>
   <main class="page">
     <div class="cats container">
-      <AppCat v-for="cat of cats" :key="cat.id" :image="cat.url" />
+      <AppCat
+        v-for="cat of cats"
+        :key="cat.id"
+        :image="cat.url"
+        :id="cat.id"
+        @catToggle="addToFavourite"
+      />
     </div>
   </main>
 </template>
@@ -19,11 +25,23 @@ export default {
   },
   methods: {
     async loadCats() {
-      const res = await fetch(
-        "https://api.thecatapi.com/v1/images/search?limit=15"
+      try {
+        const res = await fetch(
+          "https://api.thecatapi.com/v1/images/search?limit=15"
+        );
+        this.cats = await res.json();
+      } catch (e) {
+        console.error(e.message);
+      }
+    },
+    addToFavourite(id) {
+      const favouriteCat = this.cats.find((cat) => cat.id === id);
+
+      this.$store.dispatch("setCat", favouriteCat);
+      localStorage.setItem(
+        "fav",
+        JSON.stringify(this.$store.getters.getFavouriteCats)
       );
-      this.cats = await res.json();
-      console.log(this.cats);
     },
   },
   components: { AppCat },

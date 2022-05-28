@@ -1,15 +1,15 @@
 <template>
-  <div class="cat">
+  <div class="cat" :class="{ favourite: added }">
     <div class="cat__image">
       <img :src="image" alt="" />
     </div>
-    <div class="cat__fav">
+    <button class="cat__fav" @click="catHandler(id)">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
         <path
           d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z"
         />
       </svg>
-    </div>
+    </button>
   </div>
 </template>
 
@@ -17,18 +17,33 @@
 export default {
   props: {
     image: {
-      type: String
-    }
-  }
-}
+      type: String,
+    },
+    id: {
+      type: String,
+    },
+  },
+  emits: ["catToggle"],
+  data() {
+    return {
+      added: false,
+    };
+  },
+  methods: {
+    catHandler(id) {
+      this.added = !this.added;
+      this.$emit("catToggle", id, this.added);
+    },
+  },
+};
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .cat {
   position: relative;
   cursor: pointer;
   transition: 0.3s ease;
-  max-height: 225px;
+  height: 225px;
   &:hover {
     transform: scale(1.15);
     box-shadow: 0px 6px 5px rgba(0, 0, 0, 0.24),
@@ -51,10 +66,15 @@ export default {
   }
   &__fav {
     position: absolute;
+    padding: 0;
+    border: none;
+    outline: none;
+    background-color: transparent;
     bottom: 10%;
     right: 10%;
     width: 40px;
     height: 37px;
+    cursor: pointer;
   }
   &__fav path {
     fill: transparent;
@@ -62,5 +82,10 @@ export default {
     stroke-width: 2.3px;
     transition: 0.3s ease;
   }
+}
+.cat.favourite:hover .cat__fav path,
+.cat.favourite:hover .cat__fav path:hover {
+  fill: var(--color-dark-orange);
+  stroke: var(--color-dark-orange);
 }
 </style>
