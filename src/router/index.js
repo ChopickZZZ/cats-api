@@ -13,6 +13,10 @@ const router = createRouter({
     {
       path: '/favourite',
       component: AppFavourite
+    },
+    {
+      path: '/:notFound(.*)',
+      redirect: '/'
     }
   ]
 })

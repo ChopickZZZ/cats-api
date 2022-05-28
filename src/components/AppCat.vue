@@ -77,6 +77,7 @@ export default {
     cursor: pointer;
   }
   &__fav path {
+    position: relative;
     fill: transparent;
     stroke: transparent;
     stroke-width: 2.3px;
