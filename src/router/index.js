@@ -1,10 +1,10 @@
-import { createRouter, createWebHistory } from 'vue-router'
-
+import { createRouter, createWebHashHistory } from 'vue-router'
+//Using hash history mode because of the GitHub Pages bug
 import AppMain from '../components/AppMain'
 import AppFavourite from '../components/AppFavourite'
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes: [
     {
       path: '/',
