@@ -1,10 +1,14 @@
 <script setup>
 import CatImage from '@/components/CatImage.vue'
 import AppInfiniteScroll from '@/components/AppInfiniteScroll.vue'
+import SkeletonImagelist from '@/components/loading/SkeletonImagelist.vue'
+import { computed } from 'vue'
 import { loadCats, likeCat, loading } from '@/use/index'
 import { useCatStore } from '@/stores/cats'
 
 const catStore = useCatStore()
+const cats = computed(() => catStore.items)
+
 await loadCats()
 </script>
 
@@ -12,21 +16,15 @@ await loadCats()
    <main class="page">
       <div class="container">
          <div class="cats">
-            <CatImage v-for="cat of catStore.cats" :key="cat.id" :cat="cat" @catToggle="likeCat" />
+            <CatImage v-for="cat of cats" :key="cat.id" :cat="cat" @catToggle="likeCat" />
          </div>
          <AppInfiniteScroll @load="loadCats" :done="false" />
-         <p class="cats__loading" v-if="loading">
-            ...&nbsp;Загружаем еще котиков&nbsp;...
-         </p>
+         <SkeletonImagelist v-if="loading" />
       </div>
    </main>
 </template>
 
 <style lang="scss">
-.page {
-   padding: 50px 0 30px 0;
-}
-
 .cats {
    display: grid;
    grid-template-columns: repeat(auto-fit, 225px);

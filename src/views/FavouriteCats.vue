@@ -13,7 +13,7 @@ catStore.fetchCats()
 <template>
   <main class="page">
     <div class="container">
-      <h1 class="cats__empty" v-if="favouriteCats.length === 0">
+      <h1 class="cats__empty" v-if="!favouriteCats.length">
         Вы еще не добавили ни одного котика
       </h1>
       <div class="cats" v-else>

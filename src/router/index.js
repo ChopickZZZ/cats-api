@@ -27,7 +27,9 @@ const router = createRouter({
       return savedPosition
     }
     return { left: 0, top: 0 }
-  }
+  },
+  linkActiveClass: 'active',
+  linkExactActiveClass: 'active'
 })
 
 export default router

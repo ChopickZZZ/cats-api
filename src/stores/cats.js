@@ -1,11 +1,9 @@
 import { defineStore } from 'pinia'
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 
 export const useCatStore = defineStore('cats', () => {
   const items = ref([])
   const favouriteCats = ref([])
-
-  const cats = computed(() => items.value)
 
   const setCat = (cat) => {
     items.value.push(cat)
@@ -33,10 +31,9 @@ export const useCatStore = defineStore('cats', () => {
 
   return {
     items,
-    cats,
+    favouriteCats,
     setCat,
     removeCat,
-    favouriteCats,
     toggleFavouriteCats,
     fetchCats
   }
