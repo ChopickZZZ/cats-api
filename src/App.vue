@@ -1,11 +1,13 @@
 <template>
   <AppHeader />
-  <router-view />
+  <Suspense>
+    <router-view />
+  </Suspense>
 </template>
 
 <script>
-import AppHeader from "./components/AppHeader.vue";
+import AppHeader from '@/components/AppHeader.vue'
 export default {
-  components: { AppHeader },
-};
+  components: { AppHeader }
+}
 </script>

@@ -5,23 +5,21 @@ export default createStore({
     cats: []
   },
   getters: {
-    getFavouriteCats(state) {
-      return state.cats
-    }
+
   },
   mutations: {
-    SET_CAT(state, payload) {
+    SET_CAT (state, payload) {
       state.cats.push(payload)
     },
-    REMOVE_CAT(state, payload) {
+    REMOVE_CAT (state, payload) {
       state.cats = state.cats.filter(cat => cat.id !== payload.id)
     }
   },
   actions: {
-    setCat({ commit }, payload) {
+    setCat ({ commit }, payload) {
       commit('SET_CAT', payload)
     },
-    removeCat({ commit }, payload) {
+    removeCat ({ commit }, payload) {
       commit('REMOVE_CAT', payload)
     }
   },

@@ -1,24 +1,33 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
-//Using hash history mode because of the GitHub Pages bug
-import AppMain from '../components/AppMain'
-import AppFavourite from '../components/AppFavourite'
+import { createRouter, createWebHistory } from 'vue-router'
+import HomePage from '@/views/HomePage'
+
+const routes = [
+  {
+    path: '/',
+    name: 'Home',
+    component: HomePage
+  },
+  {
+    path: '/favourite',
+    name: 'Favourite',
+    component: () => import('@/views/FavouriteCats')
+  },
+  {
+    path: '/:notFound(.*)',
+    name: 'NotFound',
+    redirect: '/'
+  }
+]
 
 const router = createRouter({
-  history: createWebHashHistory(),
-  routes: [
-    {
-      path: '/',
-      component: AppMain
-    },
-    {
-      path: '/favourite',
-      component: AppFavourite
-    },
-    {
-      path: '/:notFound(.*)',
-      redirect: '/'
+  history: createWebHistory(),
+  routes,
+  scrollBehavior (to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
     }
-  ]
+    return { left: 0, top: 0 }
+  }
 })
 
 export default router

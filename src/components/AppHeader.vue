@@ -1,17 +1,17 @@
+<script setup></script>
+
 <template>
   <header class="header">
     <ul class="menu container">
-      <router-link to="/" class="menu__link">Все котики</router-link>
-      <router-link to="/favourite" class="menu__link"
-        >Любимые котики</router-link
-      >
+      <li class="menu__link">
+        <RouterLink :to="{ name: 'Home' }">Все котики</RouterLink>
+      </li>
+      <li class="menu__link">
+        <RouterLink :to="{ name: 'Favourite' }">Любимые котики</RouterLink>
+      </li>
     </ul>
   </header>
 </template>
-
-<script>
-export default {};
-</script>
 
 <style lang="scss" scoped>
 .header {
@@ -23,6 +23,7 @@ export default {};
   height: 64px;
   display: flex;
   align-items: center;
+
   &__link {
     font-size: 14px;
     line-height: calc(21 / 14 * 100%);
@@ -34,6 +35,7 @@ export default {};
     padding: 0 1.2em;
     transition: 0.3s ease;
     cursor: pointer;
+
     &:hover {
       background-color: var(--color-primary-dark-blue);
       color: rgb(255, 255, 255);
