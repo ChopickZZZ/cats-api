@@ -1,24 +1,19 @@
 <script setup>
-import { ref, defineProps, defineEmits } from 'vue'
+import { defineProps, defineEmits } from 'vue'
 defineProps({
-  image: String,
-  id: String
+  cat: Object
 })
 const emit = defineEmits(['catToggle'])
 
-const isAdded = ref(false)
-const catHandler = (id) => {
-  isAdded.value = !isAdded.value
-  emit('catToggle', id)
-}
+const catHandler = (id) => emit('catToggle', id)
 </script>
 
 <template>
-  <div class="cat" :class="{ favourite: isAdded }">
+  <div class="cat" :class="{ 'favourite': cat.liked }">
     <div class="cat__image">
-      <img :src="image" :alt="`Cat with id ${id} is not found`" />
+      <img :src="cat.url" :alt="`Cat with id ${cat.id} is not found`" />
     </div>
-    <button class="cat__fav" @click="catHandler(id)">
+    <button class="cat__fav" @click="catHandler(cat.id)">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
         <path
           d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z" />

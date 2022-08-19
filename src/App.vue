@@ -1,5 +1,9 @@
+<script setup>
+import TheHeader from '@/components/TheHeader.vue'
+</script>
+
 <template>
-  <AppHeader />
+  <TheHeader />
   <RouterView v-slot="{ Component }">
     <template v-if="Component">
       <KeepAlive>
@@ -11,10 +15,3 @@
     </template>
   </RouterView>
 </template>
-
-<script>
-import AppHeader from '@/components/AppHeader.vue'
-export default {
-  components: { AppHeader }
-}
-</script>

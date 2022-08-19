@@ -31,10 +31,17 @@
     color: rgba(255, 255, 255, 0.7);
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     height: 100%;
     padding: 0 1.2em;
     transition: 0.3s ease;
     cursor: pointer;
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      height: 100%;
+    }
 
     &:hover {
       background-color: var(--color-primary-dark-blue);

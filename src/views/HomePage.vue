@@ -12,7 +12,7 @@ await loadCats()
    <main class="page">
       <div class="container">
          <div class="cats">
-            <CatImage v-for="cat of catStore.cats" :key="cat.id" :image="cat.url" :id="cat.id" @catToggle="likeCat" />
+            <CatImage v-for="cat of catStore.cats" :key="cat.id" :cat="cat" @catToggle="likeCat" />
          </div>
          <AppInfiniteScroll @load="loadCats" :done="false" />
          <p class="cats__loading" v-if="loading">
