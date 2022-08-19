@@ -1,46 +1,10 @@
 <script setup>
 import CatImage from '@/components/CatImage.vue'
 import AppInfiniteScroll from '@/components/AppInfiniteScroll.vue'
-import { ref } from 'vue'
-import { useStore } from 'vuex'
+import { loadCats, likeCat, loading } from '@/use/index'
+import { useCatStore } from '@/stores/cats'
 
-const store = useStore()
-const cats = ref([])
-const limit = ref(20)
-const loading = ref(false)
-
-const loadCats = async () => {
-  try {
-    loading.value = true
-    const res = await fetch(
-         `https://api.thecatapi.com/v1/images/search?limit=${limit.value}&api_key=f65b2f08-f9a6-497a-946c-bd609bad686d`
-    )
-    const data = await res.json()
-    data.forEach((el) => cats.value.push(el))
-    loading.value = false
-  } catch (e) {
-    console.error(e.message)
-  }
-}
-
-const toggleCats = (id, isAdded) => {
-  const favouriteCat = cats.value.find((cat) => cat.id === id)
-
-  if (isAdded) {
-    store.dispatch('setCat', favouriteCat)
-    localStorage.setItem(
-      'fav',
-      JSON.stringify(store.getters.getFavouriteCats)
-    )
-  } else {
-    store.dispatch('removeCat', favouriteCat)
-    localStorage.setItem(
-      'fav',
-      JSON.stringify(store.getters.getFavouriteCats)
-    )
-  }
-}
-
+const catStore = useCatStore()
 await loadCats()
 </script>
 
@@ -48,7 +12,7 @@ await loadCats()
    <main class="page">
       <div class="container">
          <div class="cats">
-            <CatImage v-for="cat of cats" :key="cat.id" :image="cat.url" :id="cat.id" @catToggle="toggleCats" />
+            <CatImage v-for="cat of catStore.cats" :key="cat.id" :image="cat.url" :id="cat.id" @catToggle="likeCat" />
          </div>
          <AppInfiniteScroll @load="loadCats" :done="false" />
          <p class="cats__loading" v-if="loading">

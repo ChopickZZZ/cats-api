@@ -7,10 +7,9 @@ defineProps({
 const emit = defineEmits(['catToggle'])
 
 const isAdded = ref(false)
-
 const catHandler = (id) => {
   isAdded.value = !isAdded.value
-  emit('catToggle', id, isAdded.value)
+  emit('catToggle', id)
 }
 </script>
 

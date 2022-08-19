@@ -1,12 +1,13 @@
 <script setup>
 import CatImage from '@/components/CatImage.vue'
+import { useCatStore } from '@/stores/cats'
 import { computed } from 'vue'
-import { useStore } from 'vuex'
+import { likeCat } from '@/use/index'
 
-const store = useStore()
-const favouriteCats = computed(() => store.state.cats)
+const catStore = useCatStore()
+const favouriteCats = computed(() => catStore.favouriteCats)
 
-const loadCatsFromStorage = () => {
+/* const loadCatsFromStorage = () => {
   if (localStorage.length !== 0 && favouriteCats.value.length === 0) {
     const favourite = JSON.parse(localStorage.getItem('fav'))
     favourite.forEach((cat) => store.dispatch('setCat', cat))
@@ -19,7 +20,7 @@ const removeCat = (id) => {
   localStorage.setItem('fav', JSON.stringify(favouriteCats.value))
 }
 
-loadCatsFromStorage()
+loadCatsFromStorage() */
 </script>
 
 <template>
@@ -30,7 +31,7 @@ loadCatsFromStorage()
       </h1>
       <div class="cats" v-else>
         <CatImage v-for="cat of favouriteCats" :key="cat.id" :image="cat.url" :id="cat.id" class="favourite"
-          @catToggle="removeCat" />
+          @catToggle="likeCat" />
       </div>
     </div>
   </main>

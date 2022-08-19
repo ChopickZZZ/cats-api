@@ -1,8 +1,15 @@
 <template>
   <AppHeader />
-  <Suspense>
-    <router-view />
-  </Suspense>
+  <RouterView v-slot="{ Component }">
+    <template v-if="Component">
+      <KeepAlive>
+        <Suspense>
+          <component :is="Component" />
+          <template #fallback>...Loading</template>
+        </Suspense>
+      </KeepAlive>
+    </template>
+  </RouterView>
 </template>
 
 <script>
