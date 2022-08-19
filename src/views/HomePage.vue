@@ -1,34 +1,25 @@
 <script setup>
-import AppCat from '@/components/AppCat.vue'
+import CatImage from '@/components/CatImage.vue'
+import AppInfiniteScroll from '@/components/AppInfiniteScroll.vue'
 import { ref } from 'vue'
 import { useStore } from 'vuex'
 
 const store = useStore()
 const cats = ref([])
-const limit = ref(15)
+const limit = ref(20)
 const loading = ref(false)
 
 const loadCats = async () => {
   try {
+    loading.value = true
     const res = await fetch(
-         `https://api.thecatapi.com/v1/images/search?limit=${limit.value}`
+         `https://api.thecatapi.com/v1/images/search?limit=${limit.value}&api_key=f65b2f08-f9a6-497a-946c-bd609bad686d`
     )
     const data = await res.json()
     data.forEach((el) => cats.value.push(el))
     loading.value = false
   } catch (e) {
     console.error(e.message)
-  }
-}
-
-const loadMoreCats = async (e) => {
-  if (
-    e.target.documentElement.scrollHeight -
-      (e.target.documentElement.scrollTop + window.innerHeight) <
-      3
-  ) {
-    loading.value = true
-    loadCats()
   }
 }
 
@@ -51,15 +42,15 @@ const toggleCats = (id, isAdded) => {
 }
 
 await loadCats()
-window.addEventListener('scroll', loadMoreCats)
 </script>
 
 <template>
    <main class="page">
       <div class="container">
          <div class="cats">
-            <AppCat v-for="cat of cats" :key="cat.id" :image="cat.url" :id="cat.id" @catToggle="toggleCats" />
+            <CatImage v-for="cat of cats" :key="cat.id" :image="cat.url" :id="cat.id" @catToggle="toggleCats" />
          </div>
+         <AppInfiniteScroll @load="loadCats" :done="false" />
          <p class="cats__loading" v-if="loading">
             ...&nbsp;Загружаем еще котиков&nbsp;...
          </p>

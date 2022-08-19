@@ -1,5 +1,5 @@
 <script setup>
-import AppCat from '@/components/AppCat.vue'
+import CatImage from '@/components/CatImage.vue'
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 
@@ -29,7 +29,7 @@ loadCatsFromStorage()
         Вы еще не добавили ни одного котика
       </h1>
       <div class="cats" v-else>
-        <AppCat v-for="cat of favouriteCats" :key="cat.id" :image="cat.url" :id="cat.id" class="favourite"
+        <CatImage v-for="cat of favouriteCats" :key="cat.id" :image="cat.url" :id="cat.id" class="favourite"
           @catToggle="removeCat" />
       </div>
     </div>
